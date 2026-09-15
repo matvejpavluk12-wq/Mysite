@@ -1,11 +1,16 @@
-from flask import Flask
+ffrom flask import Flask
 
 app = Flask(__name__)
 
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def home():
-    return """
+    show_thanks = False
+
+    if __import__("flask").request.method == "POST":
+        show_thanks = True
+
+    return f"""
     <!DOCTYPE html>
     <html lang="ru">
     <head>
@@ -15,33 +20,29 @@ def home():
         <title>Мой сайт</title>
 
         <style>
-            body {
+            body {{
                 text-align: center;
                 font-family: Arial, sans-serif;
-                padding-top: 100px;
-            }
+                padding-top: 80px;
+            }}
 
-            button {
+            button {{
                 font-size: 20px;
                 padding: 15px 30px;
                 cursor: pointer;
                 border-radius: 10px;
                 border: none;
-            }
+            }}
 
-            #thanks {
-                display: none;
-                margin-top: 40px;
-            }
-
-            .heart {
+            .heart {{
                 font-size: 180px;
-            }
+                margin-top: 30px;
+            }}
 
-            .text {
+            .text {{
                 font-size: 50px;
                 font-weight: bold;
-            }
+            }}
         </style>
     </head>
 
@@ -51,18 +52,11 @@ def home():
 
         <p>Рад видеть вас на моём сайте!</p>
 
-        <button onclick="showThanks()">Нажми меня</button>
+        <form method="POST">
+            <button type="submit">Нажми меня</button>
+        </form>
 
-        <div id="thanks">
-            <div class="heart">❤️</div>
-            <div class="text">Спасибо!</div>
-        </div>
-
-        <script>
-            function showThanks() {
-                document.getElementById("thanks").style.display = "block";
-            }
-        </script>
+        {"<div class='heart'>❤️</div><div class='text'>Спасибо!</div>" if show_thanks else ""}
 
     </body>
     </html>
