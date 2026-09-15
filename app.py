@@ -11,15 +11,22 @@ def home():
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         <title>Мой сайт</title>
     </head>
+
     <body>
-        <h1>Привет мама! 👋</h1>
-        <p>это мой первый сайт!</p>
+
+        <h1>Привет всем моим друзьям и родителям! ❤️</h1>
+
+        <p>Рад видеть вас на моём сайте!</p>
+
+        <button>Нажми меня</button>
+
     </body>
     </html>
     """
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
